@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Growlight : Sprezzatech's system installation application amd disk management tool" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Growlight</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dankamongmen/growlight">View on GitHub</a>
+
+          <h1 id="project_title">Growlight</h1>
+          <h2 id="project_tagline">Sprezzatech's system installation application amd disk management tool</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dankamongmen/growlight/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dankamongmen/growlight/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="https://www.sprezzatech.com/wiki/images/d/db/Glight.png" alt="growlight logo"></p>
+
+<h1>growlight</h1>
+
+<p>Sprezzatech's system installation application.</p>
+
+<p><a href="http://www.sprezzatech.com/research.html">http://www.sprezzatech.com/research.html</a>
+ <a href="http://nick-black.com/dankwiki/index.php/Growlight">http://nick-black.com/dankwiki/index.php/Growlight</a></p>
+
+<p>Donate via Pledgie: <a href="http://www.pledgie.com/campaigns/18116">http://www.pledgie.com/campaigns/18116</a></p>
+
+<p>Dependencies:</p>
+
+<ul>
+<li>libudev (tested with Debian's 175-3.1)</li>
+<li>libblkid (tested with Debian's 2.20.1-5)</li>
+<li>libpci (tested with Debian's 3.1.9-3)</li>
+<li>libpciaccess (tested with Debian's 0.13.1-2)</li>
+<li>libdevmapper (tested with Debian's 1.02.74)</li>
+<li>libatasmart (tested with Debian's 0.19-1)</li>
+<li>OpenSSL (tested with Debian's 1.0.1)</li>
+<li>mkswap(8) from util-linux</li>
+<li>badblocks(8), mkfs.ext4(8), mkfs.ext3(8), mkfs.ext2(8) from e2fsprogs</li>
+</ul><p>Build-only dependencies:</p>
+
+<ul>
+<li>xsltproc (tested with 20800/10126/815)</li>
+<li>autotools (tested with 1.11)</li>
+</ul><p>Building from a git checkout:</p>
+
+<ul>
+<li>autoreconf -fi -Wall,error</li>
+<li>continue from "Building from a tarball"</li>
+</ul><p>Building from a tarball:</p>
+
+<ul>
+<li>./configure &amp;&amp; make &amp;&amp; sudo make install</li>
+</ul><p>===Using it===</p>
+
+<p>See the man page.</p>
+
+<p>===ZFS Support===</p>
+
+<p>This is tricky, and not recommended unless you want to experiment. You'll need
+installed SPL/ZFS libraries. You'll be using the include files from the
+checkout, since by default using the SPL headers hides the real system headers.
+Unfortunately, the headers I've copied into libzfs/ in the checkout quite
+likely don't match yours. Have fun!</p>
+
+<p>env CFLAGS="-I<code>pwd</code>/libzfs" LDFLAGS="-L/usr/local/lib" ./configure --enable-zfs</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Growlight maintained by <a href="https://github.com/dankamongmen">dankamongmen</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
