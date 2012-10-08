@@ -4,7 +4,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdio.h>
-#include <blkid.h>
 #include <limits.h>
 #include <locale.h>
 #include <stdarg.h>
@@ -45,7 +44,6 @@
 #include "config.h"
 #include "mounts.h"
 #include "target.h"
-#include "libblkid.h"
 #include "growlight.h"
 #include "aggregate.h"
 
@@ -934,10 +932,10 @@ rescan(const char *name,device *d){
 	if((d->layout == LAYOUT_NONE && (d->blkdev.realdev || d->model))
 			|| (d->layout == LAYOUT_MDADM) || (d->layout == LAYOUT_DM)){
 		char devbuf[PATH_MAX];
-		blkid_parttable ptbl;
+		/*blkid_parttable ptbl;
 		blkid_partlist ppl;
 		blkid_probe pr;
-		int pars;
+		int pars;*/
 		int dfd;
 
 		if(d->layout == LAYOUT_NONE && d->blkdev.realdev){
@@ -983,7 +981,7 @@ rescan(const char *name,device *d){
 		}
 		snprintf(devbuf,sizeof(devbuf),DEVROOT "/%s",name);
 		// FIXME move all this to its own function
-		if(probe_blkid_superblock(devbuf,&pr,d) == 0){
+		/*if(probe_blkid_superblock(devbuf,&pr,d) == 0){
 			if( (ppl = blkid_probe_get_partitions(pr)) ){
 				const char *pttable;
 				device *p;
@@ -1056,14 +1054,14 @@ rescan(const char *name,device *d){
 				}
 			}
 			blkid_free_probe(pr);
-		}else if((d->layout != LAYOUT_NONE || !d->blkdev.removable) || errno != ENOMEDIUM){
+		}if((d->layout != LAYOUT_NONE || !d->blkdev.removable) || errno != ENOMEDIUM){
 			diag("Couldn't probe %s (%s)\n",name,strerror(errno));
 			clobber_device(d);
 			return NULL;
 		}else{
 			verbf("\tDevice is unloaded/inaccessible\n");
 			d->blkdev.unloaded = 1;
-		}
+		}*/
 	}
 	if(d->logsec || d->physsec){
 		device *p;
@@ -1826,8 +1824,8 @@ int growlight_init(int argc,char * const *argv,const glightui *ui,int *disphelp)
 		} }
 	}
 	dm_get_library_version(buf,sizeof(buf));
-	verbf("%s %s\nlibblkid %s, libpci 0x%x, libdm %s, glibc %s %s\n",PACKAGE,
-			PACKAGE_VERSION,BLKID_VERSION,PCI_LIB_VERSION,buf,
+	verbf("%s %s\nlibpci 0x%x, libdm %s, glibc %s %s\n",PACKAGE,
+			PACKAGE_VERSION,PCI_LIB_VERSION,buf,
 			gnu_get_libc_version(),gnu_get_libc_release());
 	if(glight_pci_init()){
 		diag("Couldn't init libpciaccess (%s)\n",strerror(errno));
@@ -1906,8 +1904,6 @@ int growlight_stop(void){
 
 	diag("Killing the event thread...\n");
 	r |= kill_event_thread();
-	diag("Closing libblkid...\n");
-	r |= close_blkid();
 	diag("Freeing devtable...\n");
 	free_devtable();
 	if(usepci){

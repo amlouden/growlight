@@ -11,7 +11,6 @@ Donate via Pledgie: http://www.pledgie.com/campaigns/18116
 Dependencies:
 
  - libudev (tested with Debian's 175-3.1)
- - libblkid (tested with Debian's 2.20.1-5)
  - libpci (tested with Debian's 3.1.9-3)
  - libpciaccess (tested with Debian's 0.13.1-2)
  - libdevmapper (tested with Debian's 1.02.74)
